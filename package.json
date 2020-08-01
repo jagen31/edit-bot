@@ -16,5 +16,9 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "start": "node dist/discord.js"
+  },
+  "engines": {
+    "node": "10.19.0",
+    "npm": "*"
   }
 }

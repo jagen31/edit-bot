@@ -1,4 +1,3 @@
-require("dotenv").config();
 import "process"
 import { Client } from 'discord.js'
 import { parser } from './parse'
