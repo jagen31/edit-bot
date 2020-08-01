@@ -62,7 +62,19 @@ const setCommand: Command = mustBeEditing(zipper => (user, arg, state) => {
   }, "ok"]);
 });
 
-const commands: Commands = { edit, left: leftCommand }
+const print: Command = mustBeEditing(zipper => (_user, _arg, state) => {
+  return ok([state, printZipper(zipper)])
+})
+
+const commands: Commands = { 
+  edit, 
+  left: leftCommand, 
+  right: rightCommand,
+  up: upCommand,
+  down: downCommand,
+  set: setCommand,
+  print
+}
 
 const messageHandler: Command = (user, arg, state) => {
     const commandEnd = arg.indexOf(" ");
