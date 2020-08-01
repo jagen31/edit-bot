@@ -3,7 +3,7 @@ import { parser } from './parse'
 import { Zipper, Result, ok, bad, zip, ZipperMove, 
          left, right, up, down, set, printZipper } from './edit'
 
-const LOGIN_KEY = "NzM5MTQ0NjQ5ODUxMTQyMjI2.XyWMGQ.0ncqufFEiH-TIIQ3W9mgrrbB7hI";
+const LOGIN_KEY = "blah";
 const PREFIX = "e!"
 
 const client = new Client();
