@@ -94,6 +94,7 @@ const main = async () => {
     const { author, content } = message;
 
     if (content.startsWith(PREFIX)) {
+      message.reply("hello");
       const result = messageHandler(author.id, content.substring(PREFIX.length), state);
       if (result.kind === "bad") {
         await message.reply(`error: ${result.message}`);
