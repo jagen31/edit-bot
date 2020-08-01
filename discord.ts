@@ -77,7 +77,8 @@ const commands: Commands = {
 }
 
 const messageHandler: Command = (user, arg, state) => {
-    const commandEnd = arg.indexOf(" ");
+    let commandEnd = arg.indexOf(" ");
+    commandEnd = commandEnd === -1 ? arg.length : commandEnd;
     const commandStr = arg.substring(0, commandEnd);
     const command = commands[commandStr];
     return command 
@@ -94,7 +95,6 @@ const main = async () => {
     const { author, content } = message;
 
     if (content.startsWith(PREFIX)) {
-      message.reply("hello");
       const result = messageHandler(author.id, content.substring(PREFIX.length), state);
       if (result.kind === "bad") {
         await message.reply(`error: ${result.message}`);
