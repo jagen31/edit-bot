@@ -44,7 +44,7 @@ export const set = ({lefts, rights, parent}: Zipper, focus: Sexpr): Zipper => {
 
 export const down = ({lefts, focus, rights, parent}: Zipper): Result<Zipper> => {
   if (focus.kind === "string") {
-    return bad(`cannot descend into ${focus}`);
+    return bad(`cannot descend into ${focus.value}`);
   } 
   return ok(zip(focus, focus => ({ lefts, focus, rights, parent })));
 }
@@ -75,7 +75,9 @@ export const right = ({lefts, focus, rights, parent}: Zipper): Result<Zipper> =>
 }
 
 export const printZipper = ({lefts, focus, rights}: Zipper): string => {
+  const rights2 = [...rights];
+  rights2.reverse();
   return `${lefts.map(printSexpr).join("\n")}
 >>>>> ${printSexpr(focus)}
-${rights.map(printSexpr).join("\n")}`;
+${rights2.map(printSexpr).join("\n")}`;
 }

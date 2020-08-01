@@ -20,10 +20,12 @@ const edit: Command = (user, arg, state) => {
   if (result.status) {
     const { value } = result;
 
+    const zipper = zip(value);
+
     return ok([{
       ...state,
-      [user]: zip(value)
-    }, "ok"]);
+      [user]: zipper
+    }, printZipper(zipper)]);
   } else {
     return bad(`Failed to parse: ${result.expected}`)
   }
@@ -43,7 +45,7 @@ const moveCommand = (move: ZipperMove) => mustBeEditing(zipper => (user, arg, st
   return ok([{
     ...state,
     [user]: result.result
-  }, "ok"])
+  }, printZipper(result.result)])
 })
 
 const leftCommand = moveCommand(left);
@@ -56,10 +58,11 @@ const setCommand: Command = mustBeEditing(zipper => (user, arg, state) => {
   if (!result.status) {
     return bad(`Failed to parse: ${result.expected}`)
   }
+  const newZ = set(zipper, result.value);
   return ok([{
-    [user]: set(zipper, result.value),
-    ...state
-  }, "ok"]);
+    ...state,
+    [user]: newZ
+  }, printZipper(newZ)]);
 });
 
 const print: Command = mustBeEditing(zipper => (_user, _arg, state) => {
@@ -111,3 +114,16 @@ const main = async () => {
 }
 
 main();
+
+/*const parsed = parser.list.parse("((asdf b c) schleger ojierg)")
+if (parsed.status) {
+  const zipped = zip(parsed.value);
+  const result = down(zipped);
+  if (result.kind === "ok") {
+    const parsed2 = parser.expr.parse("(a b c)");
+    if (parsed2.status) {
+      const result2 = set(result.result, parsed2.value)
+      console.log(printZipper(result2));
+    }
+  }
+}*/
