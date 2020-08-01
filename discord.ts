@@ -1,9 +1,10 @@
+require("dotenv").config();
+import "process"
 import { Client } from 'discord.js'
 import { parser } from './parse'
 import { Zipper, Result, ok, bad, zip, ZipperMove, 
          left, right, up, down, set, printZipper } from './edit'
 
-const LOGIN_KEY = "blah";
 const PREFIX = "e!"
 
 const client = new Client();
@@ -92,8 +93,8 @@ const main = async () => {
       }
     }
   });
-
-  await client.login(LOGIN_KEY);
+  
+  await client.login(process.env.BOT_KEY);
   console.log("logged in")
 }
 
