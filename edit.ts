@@ -33,7 +33,9 @@ export const zip = ({ value: [focus, ...rights] }: List, parent?: Zipper["parent
 }
 
 export const rebuildOne = ({lefts, focus, rights}: Zipper): List => {
-  return list(lefts.concat([focus]).concat(rights));
+  const rights2 = [...rights];
+  rights2.reverse();
+  return list(lefts.concat([focus]).concat(rights2));
 }
 
 export type ZipperMove = (zip: Zipper) => Result<Zipper>
